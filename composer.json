@@ -1,0 +1,18 @@
+{
+    "name": "bjrambo/coolsmsphpsdk",
+    "license": "MLT",
+    "authors": [
+        {
+            "name": "BJRambo",
+            "email": "qw5414@naver.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4" : {
+            "bjrambo\\coolsmsphpsdk\\" : "src"
+         }
+    }
+}
+
