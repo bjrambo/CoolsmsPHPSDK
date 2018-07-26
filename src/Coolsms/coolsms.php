@@ -41,17 +41,13 @@ class Coolsms
         }
     }
 
-    public static function getAPIKey()
-    {
-        return  self::$apiKey;
-    }
-
     public static function getSignature()
     {
         self::$salt = uniqid();
         self::$date = date('c');
         self::$signature = hash_hmac('SHA256', self::$date . self::$salt, self::$apiSecret);
 
+        //HACK: 이 실행이 모두 마무리가 된 이후 사용할 수 있도록 만듬
         return true;
     }
 
@@ -61,12 +57,12 @@ class Coolsms
 
         $url =  self::HOST_URL . 'messages/v4/send';
 
+        //HACK: 이 실행이 모두 마무리가 된 이후 사용할 수 있도록 만듬
         $bool = self::getSignature();
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // check SSL certificate
         curl_setopt($ch, CURLOPT_POST, 1); // POST GET method
-
 
         $header = array(
             "Content-Type: application/json",
