@@ -11,8 +11,7 @@
     "require": {},
     "autoload": {
         "psr-4" : {
-            "bjrambo\\coolsmsphpsdk\\" : "src"
+            "Bjrambo\\coolsms\\" : "src"
          }
     }
 }
-
