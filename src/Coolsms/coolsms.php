@@ -57,7 +57,13 @@ class Coolsms
 		return self::$signature;
 	}
 
-	public static function request($type, $options)
+	/**
+	 * @param $method
+	 * @param $type
+	 * @param bool|Object $options
+	 * @return mixed
+	 */
+	public static function request($method, $type, $options = false)
 	{
 		$ch = curl_init();
 
@@ -68,12 +74,51 @@ class Coolsms
 			case 'SimpleMessage':
 				$endPoint = 'messages/v4/send';
 				break;
+			case 'createMessageGroup':
+				$endPoint = 'messages/v4/groups';
+				break;
 			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case 'addGroupMessages':
+				$endPoint = "messages/v4/groups/{$options->groupId}/messages";
+				unset($options->groupId);
+				break;
+			case 'sendGroupMessages':
+				$endPoint = "messages/v4/groups/{$options->groupId}/send";
+				$options = false;
+				var_dump($endPoint);
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+			case '':
+				break;
+
+
+			default:
+				break;
 		}
 
 		$url = self::HOST_URL . $endPoint;
 
-		if(self::$accessToken !== null)
+		if (self::$accessToken !== null)
 		{
 			$header = array(
 				"Content-Type: application/json",
@@ -87,16 +132,41 @@ class Coolsms
 				'Authorization: HMAC-SHA256 apiKey=' . self::$apiKey . ', date=' . self::$date . ', salt=' . self::$salt . ', signature=' . self::getSignature()
 			);
 		}
+
+		switch ($method)
+		{
+			case "POST":
+				if ($options)
+				{
+					curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($options));
+				}
+				break;
+			case "PUT":
+				if ($options)
+				{
+					curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($options));
+				}
+				break;
+			default:
+				if ($options)
+				{
+					$url = sprintf("%s?%s", $url, http_build_query($options));
+				}
+				break;
+		}
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // check SSL certificate
-		curl_setopt($ch, CURLOPT_POST, 1); // POST GET method
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $options);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30); // TimeOut value
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // curl_exec() result output (1 = true, 0 = false)
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		if (curl_error($ch))
+		{
+			print_r(curl_error($ch));
+		}
 
 		$result = json_decode(curl_exec($ch));
-
+		print_r($result);
 		return $result;
 	}
 }

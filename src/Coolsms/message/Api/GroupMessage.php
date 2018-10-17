@@ -8,7 +8,7 @@ class GroupMessage extends Coolsms
 {
 	public static function createGroup()
 	{
-		var_dump('1');
+		return self::request('POST', 'createMessageGroup', null);
 	}
 
 	public static function getGroupList()
@@ -26,14 +26,19 @@ class GroupMessage extends Coolsms
 
 	}
 
-	public static function addGroupMessages()
+	public static function addGroupMessages($groupId, $options)
 	{
+		$options->groupId = $groupId;
+		print_r($options);
 
+		return self::request('PUT', 'addGroupMessages', $options, );
 	}
 
-	public static function sendGroupMessages()
+	public static function sendGroupMessages($groupId)
 	{
-
+		$args = new \stdClass();
+		$args->groupId = $groupId;
+		return self::request('POST', 'sendGroupMessages', $args);
 	}
 
 	public static function scheduleGroupMessage()

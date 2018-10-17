@@ -11,6 +11,6 @@ class SimpleMessage extends Coolsms
 	{
 		$jsonData = json_encode($optionData);
 
-		return self::request('SimpleMessage', $jsonData);
+		return self::request('POST', 'SimpleMessage', $jsonData);
 	}
 }

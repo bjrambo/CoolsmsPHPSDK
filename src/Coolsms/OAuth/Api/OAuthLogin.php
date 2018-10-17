@@ -49,7 +49,6 @@ class OAuthLogin extends CoolsmsOAuth
 		$args->redirect_uri = $redirect_url;
 		$args->code = $_GET['code'];
 		$jsonString = json_encode($args);
-		var_dump($jsonString);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
