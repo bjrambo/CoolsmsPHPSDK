@@ -60,6 +60,6 @@ class OAuthLogin extends CoolsmsOAuth
 		$result = curl_exec($ch);
 
 		$src_data = json_decode($result);
-		var_dump($src_data);
+		return $src_data;
 	}
 }
