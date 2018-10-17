@@ -11,9 +11,13 @@ class GroupMessage extends Coolsms
 		return self::request('POST', 'createMessageGroup', null);
 	}
 
-	public static function getGroupList()
+	/**
+	 * @param bool|object $options
+	 * @return mixed
+	 */
+	public static function getGroupList($options = false)
 	{
-
+		return self::request('GET', 'getGroupList', $options);
 	}
 
 	public static function getGroupInfo()
@@ -31,7 +35,7 @@ class GroupMessage extends Coolsms
 		$options->groupId = $groupId;
 		print_r($options);
 
-		return self::request('PUT', 'addGroupMessages', $options, );
+		return self::request('PUT', 'addGroupMessages', $options);
 	}
 
 	public static function sendGroupMessages($groupId)
