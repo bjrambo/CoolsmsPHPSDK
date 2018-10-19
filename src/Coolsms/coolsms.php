@@ -77,7 +77,8 @@ class Coolsms
 			case 'createMessageGroup':
 				$endPoint = 'messages/v4/groups';
 				break;
-			case '':
+			case 'getGroupList':
+				$endPoint = 'messages/v4/groups';
 				break;
 			case '':
 				break;
