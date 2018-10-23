@@ -20,14 +20,18 @@ class GroupMessage extends Coolsms
 		return self::request('GET', 'getGroupList', $options);
 	}
 
-	public static function getGroupInfo()
+	public static function getGroupInfo($groupId)
 	{
-
+		$args = new \stdClass();
+		$args->groupId = $groupId;
+		return self::request('GET', 'getMessageGroupInfo', $args);
 	}
 
-	public static function deleteGroup()
+	public static function deleteGroup($groupId)
 	{
-
+		$args = new \stdClass();
+		$args->groupId = $groupId;
+		return self::request('DELETE', 'deleteMessageGroup', $args);
 	}
 
 	public static function addGroupMessages($groupId, $options)

@@ -80,9 +80,13 @@ class Coolsms
 			case 'getGroupList':
 				$endPoint = 'messages/v4/groups';
 				break;
-			case '':
+			case 'getMessageGroupInfo':
+				$endPoint = "messages/v4/groups/{$options->groupId}";
+				$options = false;
 				break;
-			case '':
+			case 'deleteMessageGroup':
+				$endPoint = "messages/v4/groups/{$options->groupId}";
+				$options = false;
 				break;
 			case '':
 				break;
@@ -93,7 +97,6 @@ class Coolsms
 			case 'sendGroupMessages':
 				$endPoint = "messages/v4/groups/{$options->groupId}/send";
 				$options = false;
-				var_dump($endPoint);
 				break;
 			case '':
 				break;
@@ -148,6 +151,12 @@ class Coolsms
 					curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($options));
 				}
 				break;
+			case "DELETE":
+				if ($options)
+				{
+					curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($options));
+				}
+				break;
 			default:
 				if ($options)
 				{
@@ -167,7 +176,6 @@ class Coolsms
 		}
 
 		$result = json_decode(curl_exec($ch));
-		print_r($result);
 		return $result;
 	}
 }
