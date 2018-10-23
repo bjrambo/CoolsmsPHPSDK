@@ -8,7 +8,7 @@ class GroupMessage extends Coolsms
 {
 	public static function createGroup()
 	{
-		return self::request('POST', 'createMessageGroup', null);
+		return self::request('POST', 'messages/v4/groups', null);
 	}
 
 	/**
@@ -17,36 +17,27 @@ class GroupMessage extends Coolsms
 	 */
 	public static function getGroupList($options = false)
 	{
-		return self::request('GET', 'getGroupList', $options);
+		return self::request('GET', 'messages/v4/groups', $options);
 	}
 
 	public static function getGroupInfo($groupId)
 	{
-		$args = new \stdClass();
-		$args->groupId = $groupId;
-		return self::request('GET', 'getMessageGroupInfo', $args);
+		return self::request('GET', "messages/v4/groups/{$groupId}");
 	}
 
 	public static function deleteGroup($groupId)
 	{
-		$args = new \stdClass();
-		$args->groupId = $groupId;
-		return self::request('DELETE', 'deleteMessageGroup', $args);
+		return self::request('DELETE', "messages/v4/groups/{$groupId}");
 	}
 
 	public static function addGroupMessages($groupId, $options)
 	{
-		$options->groupId = $groupId;
-		print_r($options);
-
-		return self::request('PUT', 'addGroupMessages', $options);
+		return self::request('PUT', "messages/v4/groups/{$groupId}/messages", $options);
 	}
 
 	public static function sendGroupMessages($groupId)
 	{
-		$args = new \stdClass();
-		$args->groupId = $groupId;
-		return self::request('POST', 'sendGroupMessages', $args);
+		return self::request('POST', "messages/v4/groups/{$groupId}/send");
 	}
 
 	public static function scheduleGroupMessage()

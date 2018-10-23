@@ -63,62 +63,11 @@ class Coolsms
 	 * @param bool|Object $options
 	 * @return mixed
 	 */
-	public static function request($method, $type, $options = false)
+	public static function request($method, $endPoint, $options = false)
 	{
 		$ch = curl_init();
 
 		$endPoint = 'messages/v4/send';
-
-		switch ($type)
-		{
-			case 'SimpleMessage':
-				$endPoint = 'messages/v4/send';
-				break;
-			case 'createMessageGroup':
-				$endPoint = 'messages/v4/groups';
-				break;
-			case 'getGroupList':
-				$endPoint = 'messages/v4/groups';
-				break;
-			case 'getMessageGroupInfo':
-				$endPoint = "messages/v4/groups/{$options->groupId}";
-				$options = false;
-				break;
-			case 'deleteMessageGroup':
-				$endPoint = "messages/v4/groups/{$options->groupId}";
-				$options = false;
-				break;
-			case '':
-				break;
-			case 'addGroupMessages':
-				$endPoint = "messages/v4/groups/{$options->groupId}/messages";
-				unset($options->groupId);
-				break;
-			case 'sendGroupMessages':
-				$endPoint = "messages/v4/groups/{$options->groupId}/send";
-				$options = false;
-				break;
-			case '':
-				break;
-			case '':
-				break;
-			case '':
-				break;
-			case '':
-				break;
-			case '':
-				break;
-			case '':
-				break;
-			case '':
-				break;
-			case '':
-				break;
-
-
-			default:
-				break;
-		}
 
 		$url = self::HOST_URL . $endPoint;
 
