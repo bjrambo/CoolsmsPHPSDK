@@ -67,8 +67,6 @@ class Coolsms
 	{
 		$ch = curl_init();
 
-		$endPoint = 'messages/v4/send';
-
 		$url = self::HOST_URL . $endPoint;
 
 		if (self::$accessToken !== null)
