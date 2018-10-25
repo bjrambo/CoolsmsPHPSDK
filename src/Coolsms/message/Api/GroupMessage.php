@@ -35,7 +35,6 @@ class GroupMessage extends Coolsms
 		if (is_array($options->to))
 		{
 			$message = array();
-			$i = 0;
 			foreach ($options->to as $key => $phoneNumber)
 			{
 				$message[$key] = new \stdClass();
@@ -43,7 +42,6 @@ class GroupMessage extends Coolsms
 				$message[$key]->type = $options->type;
 				$message[$key]->to = $phoneNumber;
 				$message[$key]->from = $options->from;
-				$i++;
 			}
 
 			$args = new \stdClass();
