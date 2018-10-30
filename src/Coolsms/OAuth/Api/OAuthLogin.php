@@ -6,27 +6,18 @@ use CoolsmsOAuth\CoolsmsOAuth;
 
 class OAuthLogin extends CoolsmsOAuth
 {
-	public static function Login($redirect_url)
-	{
-		$args = new \stdClass();
-		$args->client_id = self::$clientData->client_id;
-		$args->client_secret = self::$clientData->client_secret;
-
-		return self::OauthRequest($args, $redirect_url);
-	}
-
-	public static function OauthRequest($dataJson, $redirect_url = null)
+	public static function getLoginUrl($redirect_url)
 	{
 		$params = array(
-			'client_id'     => $dataJson->client_id,
+			'client_id'     => self::$clientData->client_id,
 			'response_type' => 'code',
 			'scope'         => 'users:read users.profile:read',
 			'redirect_uri'  => $redirect_url,
 			'state'         => self::generateRandomString(),
 		);
-		$url = self::$coolsmsOauthUrl . http_build_query($params, '', '&');
-		return $url;
+		return self::$coolsmsOauthUrl . http_build_query($params, '', '&');
 	}
+
 	public static function generateRandomString($length = 10)
 	{
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -38,6 +29,7 @@ class OAuthLogin extends CoolsmsOAuth
 		}
 		return $randomString;
 	}
+
 	public static function getAccessToken($redirect_url)
 	{
 		$url = self::$coolsmsAccessTokenUrl;
