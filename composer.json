@@ -1,6 +1,6 @@
 {
     "name": "bjrambo/coolsmsphpsdk",
-    "license": "MLT",
+    "license": "MIT",
     "authors": [
         {
             "name": "BJRambo",
@@ -8,7 +8,13 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "php": ">=5.3.3",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-mcrypt": "*",
+        "ext-json": "*"
+    },
     "autoload": {
         "psr-4" : {
             "Coolsms\\" : "src/Coolsms"
