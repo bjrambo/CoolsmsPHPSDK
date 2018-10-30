@@ -30,7 +30,7 @@ class GroupMessage extends Coolsms
 		return self::request('DELETE', "messages/v4/groups/{$groupId}");
 	}
 
-	public static function addGroupMessages($groupId, $options)
+	public static function addGroupMessages($groupId, $options, $kakaoOptions = false)
 	{
 		if (is_array($options->to))
 		{
@@ -42,6 +42,11 @@ class GroupMessage extends Coolsms
 				$message[$key]->type = $options->type;
 				$message[$key]->to = $phoneNumber;
 				$message[$key]->from = $options->from;
+
+				if($kakaoOptions)
+				{
+					$message[$key]->kakaoOptions = $kakaoOptions;
+				}
 			}
 
 			$args = new \stdClass();
