@@ -7,7 +7,7 @@ Send Message & Alimtalk using PHP and REST API Ver 4.
 - The recommended way to install Coolsms PHP SDK is through composer:
 
   ```bash
-  wait.. will be make message.
+  $ composer require bjrambo/coolsmsphpsdk
   ```
 
 - Github : https://github.com/bjrambo/CoolsmsPHPSDK
